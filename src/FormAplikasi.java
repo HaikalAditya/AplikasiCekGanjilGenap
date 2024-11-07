@@ -23,6 +23,7 @@ public class FormAplikasi extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Aplikasi Cek Nomor Ganjil/Genap");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Haikal Aditya Rahmatullah"));
         jPanel1.setToolTipText("");
@@ -33,7 +34,6 @@ public class FormAplikasi extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Aplikasi Cek Nomor Ganjil / Genap");
         jLabel1.setToolTipText("");
-        jLabel1.setPreferredSize(new java.awt.Dimension(358, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -49,6 +49,7 @@ public class FormAplikasi extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Masukkan Angka");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -56,21 +57,24 @@ public class FormAplikasi extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 14;
         gridBagConstraints.ipady = 12;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(jLabel2, gridBagConstraints);
 
         lblHasil1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        lblHasil1.setText("masukkan Angka untuk melihat hasil");
+        lblHasil1.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 46;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(lblHasil1, gridBagConstraints);
 
+        btnCek.setBackground(new java.awt.Color(0, 102, 102));
+        btnCek.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        btnCek.setForeground(new java.awt.Color(255, 255, 255));
         btnCek.setText("Cek Nomor");
         btnCek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,30 +86,38 @@ public class FormAplikasi extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 14;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(btnCek, gridBagConstraints);
 
+        txtInput.setToolTipText("");
+        txtInput.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtInput.setName(""); // NOI18N
-        txtInput.setPreferredSize(new java.awt.Dimension(70, 28));
+        txtInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtInputFocusGained(evt);
+            }
+        });
+        txtInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtInputKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 102;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(txtInput, gridBagConstraints);
 
         lblHasil2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        lblHasil2.setText("masukkan Angka untuk melihat hasil");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 46;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(lblHasil2, gridBagConstraints);
 
@@ -136,7 +148,6 @@ public class FormAplikasi extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
         jPanel1.getAccessibleContext().setAccessibleName("");
-        jPanel1.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -154,11 +165,26 @@ public class FormAplikasi extends javax.swing.JFrame {
         } else {
             lblHasil2.setText("Angka " +number + " bukan bilangan prima");
         }
-    } catch (NumberFormatException ex) {
+    } catch (NumberFormatException ex) { //Menampilkan Kalau eror
         JOptionPane.showMessageDialog(this, "Masukkan angka yang valid!", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnCekActionPerformed
 
+    private void txtInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInputKeyTyped
+        // Hanya menerima angka
+        char c = evt.getKeyChar();
+    if (!Character.isDigit(c)) {
+        evt.consume();  
+    }
+    }//GEN-LAST:event_txtInputKeyTyped
+
+    private void txtInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInputFocusGained
+        //membersihkan TextField dan hasil
+        txtInput.setText("");
+        lblHasil1.setText("masukkan Angka untuk melihat hasil");
+        lblHasil2.setText("masukkan Angka untuk melihat hasil");
+    }//GEN-LAST:event_txtInputFocusGained
+    //mencek bilangan prima
     private boolean isPrime(int number) {
     if (number <= 1) return false;
     for (int i = 2; i <= Math.sqrt(number); i++) {
